@@ -1,0 +1,84 @@
+Titanic
+1997
+Drama
+Romance
+O Poderoso Chefão
+1972
+Crime
+Drama
+Pulp Fiction
+1994
+Crime
+Drama
+Um Sonho de Liberdade
+1994
+Drama
+Crime
+Clube da Luta
+1999
+Drama
+Suspense
+Batman: O Cavaleiro das Trevas
+2008
+Ação
+Crime
+A Origem
+2010
+Ação
+Suspense
+Forrest Gump: O Contador de Histórias
+1994
+Drama
+Romance
+Matrix
+1999
+Ação
+Ficção Científica
+Star Wars: Episódio IV - Uma Nova Esperança
+1977
+Ação
+Aventura
+Avatar
+2009
+Ação
+Ficção Científica
+O Senhor dos Anéis: O Retorno do Rei
+2003
+Aventura
+Fantasia
+Interestelar
+2014
+Aventura
+Ficção Científica
+Cidade de Deus
+2002
+Crime
+Drama
+Os Vingadores
+2012
+Ação
+Aventura
+Jurassic Park
+1993
+Ação
+Aventura
+Harry Potter e a Pedra Filosofal
+2001
+Aventura
+Fantasia
+O Exorcista
+1973
+Horror
+Suspense
+O Grande Lebowski
+1998
+Comédia
+Crime
+O Labirinto do Fauno
+2006
+Drama
+Fantasia
+Toy Story
+1995
+Animação
+Aventura
