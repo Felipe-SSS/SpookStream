@@ -4,7 +4,8 @@
 #include <locale.h>
 using namespace std;
 
-struct info{ // Struct com as informacoes dos filmes
+// Struct com as informacoes dos filmes
+struct Filme{ 
 	string nome; // Nome do filme
 	int ano_lancamento; // Ano de lancamento do filme
 	string genero1; // Genero principal do filme
@@ -17,7 +18,7 @@ int main(){
 	
 	ifstream lista;
 	string arq_lista = "ListaFilmes.txt";
-	info filme[100];
+	Filme filme[100];
 	int quant = 0;
 
 	lista.open(arq_lista.c_str(), ifstream::in);
