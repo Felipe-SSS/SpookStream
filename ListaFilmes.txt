@@ -18,34 +18,34 @@ Clube da Luta
 1999
 Drama
 Suspense
-Batman: O Cavaleiro das Trevas
-2008
-Ação
-Crime
+Tá Dando Onda
+2007
+Animação
+Aventura
 A Origem
 2010
 Ação
 Suspense
-Forrest Gump: O Contador de Histórias
-1994
+Amnésia
+2000
 Drama
-Romance
+Suspense
 Matrix
 1999
 Ação
 Ficção Científica
-Star Wars: Episódio IV - Uma Nova Esperança
-1977
-Ação
+Marmaduke
+2022
+Comédia
 Aventura
 Avatar
 2009
 Ação
 Ficção Científica
-O Senhor dos Anéis: O Retorno do Rei
-2003
-Aventura
-Fantasia
+De repente 30
+2004
+Comédia
+Romance
 Interestelar
 2014
 Aventura
@@ -62,10 +62,10 @@ Jurassic Park
 1993
 Ação
 Aventura
-Harry Potter e a Pedra Filosofal
-2001
-Aventura
-Fantasia
+Orgulho e Preconceito
+2005
+Romance
+Drama
 O Exorcista
 1973
 Horror
