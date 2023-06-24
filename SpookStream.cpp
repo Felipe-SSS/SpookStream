@@ -16,8 +16,8 @@ struct dados {
 };
 
 struct indices {
-  string genero;
-  int indice;
+  string genero; // genero do filme
+  int indice;    // indice do filme na matriz de similaridade
 };
 
 // matriz que contém as similaridades entre os gêneros dos filmes
@@ -86,8 +86,8 @@ void inicio(int quant, dados filmes[], dados filmesSelecionados[]) {
 
     filmesSelecionados[i] = filmes[numFilme - 1];
 
-    cout << "Filme escolhido: " << filmes[numFilme - 1].nome << endl;
-    cout << "Escolha outro filme: " << endl;
+    cout << "\nFilme escolhido: " << filmes[numFilme - 1].nome << endl;
+    cout << "\nEscolha outro filme: ";
   }
 }
 
@@ -95,7 +95,7 @@ void inicio(int quant, dados filmes[], dados filmesSelecionados[]) {
 float consultarMatrizSimilaridade(string generoFilmeSelecionado, string generoFilme) {
 
   float similaridade;
-  int linha, coluna;
+  int linha = -1, coluna = -1;
 
   for (int i = 0; i < 11; i++) {
 
@@ -106,12 +106,12 @@ float consultarMatrizSimilaridade(string generoFilmeSelecionado, string generoFi
       coluna = i;
     }
 
-    // pega similaridade dos filmes na matriz
-    similaridade = matrizSimilaridade[linha][coluna];
-    return similaridade;
+    if (linha != -1 && coluna != -1) {
+      similaridade = matrizSimilaridade[linha][coluna];
+      break;
+    }
   }
-
-  return 0;
+  return similaridade;
 }
 
 // função para calcular 'pesos' e atribuí-los à probabilidade de cada filme
@@ -127,23 +127,23 @@ void calcularNovaProbabilidade(int quant, dados filmes[], dados filmesSelecionad
         filmes[i].probabilidade = 1;
       }
 
-      // comparando com o gênero secundário
+      // comparando primário com secundário
       if (filmesSelecionados[j].genero1.compare(filmes[i].genero2) == 0) {
         // chamando a função que retorna a similaridade entre os gêneros
         similaridade = consultarMatrizSimilaridade(filmesSelecionados[j].genero1, filmes[i].genero2);
-        filmes[i].probabilidade *= similaridade;
+        filmes[i].probabilidade = (filmes[i].probabilidade + similaridade) / 2;
       }
 
       // comparando os gêneros secundários
       if (filmesSelecionados[j].genero2.compare(filmes[i].genero2) == 0) {
-        filmes[i].probabilidade *= 0.5;
+        filmes[i].probabilidade = (filmes[i].probabilidade + 0.5) / 2;
       }
 
       // comparando secundário com primário
       if (filmesSelecionados[j].genero2.compare(filmes[i].genero1) == 0) {
         // chamando a função que retorna a similaridade entre os gêneros
         similaridade = consultarMatrizSimilaridade(filmesSelecionados[j].genero2, filmes[i].genero1);
-        filmes[i].probabilidade *= similaridade;
+        filmes[i].probabilidade = (filmes[i].probabilidade + similaridade) / 2;
       }
     }
   }
