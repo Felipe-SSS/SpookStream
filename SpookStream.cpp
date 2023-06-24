@@ -1,8 +1,8 @@
-#include <iostream>
-#include <locale.h>
 #include <cstring>
 #include <fstream>
 #include <iomanip> // tabela
+#include <iostream>
+#include <locale.h>
 
 using namespace std;
 
@@ -15,9 +15,40 @@ struct dados {
   float probabilidade; // chance de recomendar o filme ao usuário
 };
 
+struct indices {
+  string genero;
+  int indice;
+};
+
+// matriz que contém as similaridades entre os gêneros dos filmes
+// consulte o README
+float matrizSimilaridade[11][11] = {{1, 0.8, 0.35, 0.3, 0.6, 0.7, 0.75, 0.4, 0.1, 0.55},
+                                    {0.8, 1, 0.3, 0.25, 0.4, 0.5, 0.6, 0.3, 0.15, 0.5},
+                                    {0.35, 0.3, 1, 0.8, 0.2, 0.25, 0.35, 0.15, 0.05, 0.3},
+                                    {0.3, 0.25, 0.8, 1, 0.3, 0.2, 0.3, 0.1, 0.05, 0.25},
+                                    {0.6, 0.4, 0.2, 0.3, 1, 0.35, 0.45, 0.3, 0.3, 0.4},
+                                    {0.7, 0.5, 0.25, 0.2, 0.35, 1, 0.8, 0.6, 0.05, 0.45},
+                                    {0.75, 0.6, 0.35, 0.3, 0.45, 0.8, 1, 0.65, 0.05, 0.55},
+                                    {0.4, 0.3, 0.15, 0.1, 0.3, 0.6, 0.65, 1, 0.05, 0.5},
+                                    {0.1, 0.15, 0.05, 0.05, 0.3, 0.05, 0.05, 0.05, 1, 0.2},
+                                    {0.55, 0.5, 0.3, 0.25, 0.4, 0.45, 0.55, 0.5, 0.2, 1}};
+
+// vetor com os generos e seus indices
+indices generos[11] = {{"Ação", 0},
+                       {"Aventura", 1},
+                       {"Drama", 2},
+                       {"Romance", 3},
+                       {"Comédia", 4},
+                       {"Crime", 5},
+                       {"Suspense", 6},
+                       {"Horror", 7},
+                       {"Animação", 8},
+                       {"Fantasia", 9},
+                       {"Ficção Científica", 10}};
+
 // função de início
 // mostrar catalógo e ler filmes favoritos do usuário
-void inicio(int quant, dados filmes[], dados *filmesSelecionados[]) {
+void inicio(int quant, dados filmes[], dados filmesSelecionados[]) {
 
   int cont = 1; // contador para ajudar no ajuste do catálogo em forma de tabela
   int numFilme; // numero que usuário escolherá na seleção de filmes
@@ -44,11 +75,11 @@ void inicio(int quant, dados filmes[], dados *filmesSelecionados[]) {
   cout << endl;
 
   // lendo filmes selecionados
-  for (int i = 0; i < 3; i ++) {
+  for (int i = 0; i < 3; i++) {
     cin >> numFilme;
-    
+
     // se o filme não estiver no catálogo será pedido que digite novamente
-    while (numFilme < 1 || numFilme >= quant) {
+    while (numFilme < 1 || numFilme > quant) {
       cout << "Esse filme não está no catálogo. Digite outro número:" << endl;
       cin >> numFilme;
     }
@@ -56,9 +87,66 @@ void inicio(int quant, dados filmes[], dados *filmesSelecionados[]) {
     filmesSelecionados[i] = filmes[numFilme - 1];
 
     cout << "Filme escolhido: " << filmes[numFilme - 1].nome << endl;
-    cout << "\nEscolha outro filme: " << endl;
+    cout << "Escolha outro filme: " << endl;
+  }
+}
+
+// função que busca os filmes na matriz e retorna a similaridade
+float consultarMatrizSimilaridade(string generoFilmeSelecionado, string generoFilme) {
+
+  float similaridade;
+  int linha, coluna;
+
+  for (int i = 0; i < 11; i++) {
+
+    if (generos[i].genero.compare(generoFilme) == 0) {
+      linha = i;
+    }
+    if (generos[i].genero.compare(generoFilmeSelecionado) == 0) {
+      coluna = i;
+    }
+
+    // pega similaridade dos filmes na matriz
+    similaridade = matrizSimilaridade[linha][coluna];
+    return similaridade;
   }
 
+  return 0;
+}
+
+// função para calcular 'pesos' e atribuí-los à probabilidade de cada filme
+void calcularNovaProbabilidade(int quant, dados filmes[], dados filmesSelecionados[]) {
+
+  float similaridade;
+
+  for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < quant; i++) {
+
+      // comparando os gêneros principais
+      if (filmesSelecionados[j].genero1.compare(filmes[i].genero1) == 0) {
+        filmes[i].probabilidade = 1;
+      }
+
+      // comparando com o gênero secundário
+      if (filmesSelecionados[j].genero1.compare(filmes[i].genero2) == 0) {
+        // chamando a função que retorna a similaridade entre os gêneros
+        similaridade = consultarMatrizSimilaridade(filmesSelecionados[j].genero1, filmes[i].genero2);
+        filmes[i].probabilidade *= similaridade;
+      }
+
+      // comparando os gêneros secundários
+      if (filmesSelecionados[j].genero2.compare(filmes[i].genero2) == 0) {
+        filmes[i].probabilidade *= 0.5;
+      }
+
+      // comparando secundário com primário
+      if (filmesSelecionados[j].genero2.compare(filmes[i].genero1) == 0) {
+        // chamando a função que retorna a similaridade entre os gêneros
+        similaridade = consultarMatrizSimilaridade(filmesSelecionados[j].genero2, filmes[i].genero1);
+        filmes[i].probabilidade *= similaridade;
+      }
+    }
+  }
 }
 
 int main() {
@@ -84,11 +172,20 @@ int main() {
     lista.ignore();
     getline(lista, filmes[quant].genero1, '\n');
     getline(lista, filmes[quant].genero2, '\n');
-    quant++; 
+    quant++;
   }
 
   // chamando função de início
   inicio(quant, filmes, filmesSelecionados);
+
+  // chamando função que calcula probabilidade de recomendar filmes
+  calcularNovaProbabilidade(quant, filmes, filmesSelecionados);
+
+  // mostrando filmes e a chance deles serem recomendados
+  for (int i = 0; i < quant; i++) {
+    cout << "Nome do filme: " << filmes[i].nome << endl;
+    cout << "Chance de recomendá-lo: " << filmes[i].probabilidade << endl << endl;
+  }
 
   // fechando arquivo de texto
   lista.close();
