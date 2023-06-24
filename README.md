@@ -2,17 +2,17 @@
 
 Para acessar os gêneros na matriz de similaridade use os seguintes números como index (tanto para linhas quanto para colunas).
 
-0 - Ação
-1 - Aventura
-2 - Drama
-3 - Romance
-4 - Comédia
-5 - Crime
-6 - Suspense
-7 - Horror
-8 - Animação
-9 - Fantasia
-10 - Ficção Científica
+0. Ação
+1. Aventura
+2. Drama
+3. Romance
+4. Comédia
+5. Crime
+6. Suspense
+7. Horror
+8. Animação
+9. Fantasia
+10. Ficção Científica
 
 ## Matriz de Similaridade
 
