@@ -2,7 +2,7 @@ Titanic
 1997
 Drama
 Romance
-O Poderoso Chefão
+O Poderoso Chefao
 1972
 Crime
 Drama
@@ -20,47 +20,47 @@ Drama
 Suspense
 Batman: O Cavaleiro das Trevas
 2008
-Ação
+Acao
 Crime
 A Origem
 2010
-Ação
+Acao
 Suspense
-Forrest Gump: O Contador de Histórias
+Forrest Gump: O Contador de Historias
 1994
 Drama
 Romance
 Matrix
 1999
-Ação
-Ficção Científica
-Star Wars: Episódio IV - Uma Nova Esperança
+Acao
+Ficcao Cientifica
+Star Wars: Episodio IV - Uma Nova Esperanca
 1977
-Ação
+Acao
 Aventura
 Avatar
 2009
-Ação
-Ficção Científica
-O Senhor dos Anéis: O Retorno do Rei
+Acao
+Ficcao Cientifica
+O Senhor dos Aneis: O Retorno do Rei
 2003
 Aventura
 Fantasia
 Interestelar
 2014
 Aventura
-Ficção Científica
+Ficcao Cientifica
 Cidade de Deus
 2002
 Crime
 Drama
 Os Vingadores
 2012
-Ação
+Acao
 Aventura
 Jurassic Park
 1993
-Ação
+Acao
 Aventura
 Harry Potter e a Pedra Filosofal
 2001
@@ -72,7 +72,7 @@ Horror
 Suspense
 O Grande Lebowski
 1998
-Comédia
+Comedia
 Crime
 O Labirinto do Fauno
 2006
@@ -80,5 +80,5 @@ Drama
 Fantasia
 Toy Story
 1995
-Animação
+Animacao
 Aventura
