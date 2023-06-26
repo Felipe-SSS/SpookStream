@@ -43,10 +43,10 @@ int main()
 	for (int i = 0; i < quant; i++)
 	{
 
-		cout << "Nome do " << i + 1 << "º filme: " << filme[i].nome << endl;
-		cout << "Ano de lancamento do " << i + 1 << "º filme: " << filme[i].ano_lancamento << endl;
-		cout << "Genero principal do " << i + 1 << "º filme: " << filme[i].genero1 << endl;
-		cout << "Genero secundario do " << i + 1 << "º filme: " << filme[i].genero2 << endl
+		cout << "Nome do " << i + 1 << " filme: " << filme[i].nome << endl;
+		cout << "Ano de lancamento do " << i + 1 << " filme: " << filme[i].ano_lancamento << endl;
+		cout << "Genero principal do " << i + 1 << " filme: " << filme[i].genero1 << endl;
+		cout << "Genero secundario do " << i + 1 << " filme: " << filme[i].genero2 << endl
 			 << endl;
 	}
 
