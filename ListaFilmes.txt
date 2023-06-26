@@ -2,7 +2,7 @@ Titanic
 1997
 Drama
 Romance
-O Poderoso Chefão
+O Poderoso Chefao
 1972
 Crime
 Drama
@@ -24,7 +24,7 @@ Animação
 Aventura
 A Origem
 2010
-Ação
+Acao
 Suspense
 Amnésia
 2000
@@ -49,18 +49,18 @@ Romance
 Interestelar
 2014
 Aventura
-Ficção Científica
+Ficcao Cientifica
 Cidade de Deus
 2002
 Crime
 Drama
 Os Vingadores
 2012
-Ação
+Acao
 Aventura
 Jurassic Park
 1993
-Ação
+Acao
 Aventura
 Orgulho e Preconceito
 2005
@@ -72,7 +72,7 @@ Horror
 Suspense
 O Grande Lebowski
 1998
-Comédia
+Comedia
 Crime
 O Labirinto do Fauno
 2006
@@ -80,5 +80,5 @@ Drama
 Fantasia
 Toy Story
 1995
-Animação
+Animacao
 Aventura
