@@ -1,5 +1,5 @@
 # SpookStream
-Projeto desenvolvido como trabalho da matéria de Algorítmos e Estruturas de Dados.
+Projeto desenvolvido como trabalho da matéria de Algorítmos e Estruturas de Dados 1.
 
 
 ## Gêneros de filmes
@@ -32,7 +32,3 @@ Para acessar os gêneros na matriz de similaridade use os seguintes números com
 | Animação | 0.4  | 0.3      | 0.15  | 0.1     | 0.3   | 0.6      | 0.65   | 1        | 0.05     | 0.5    |
 | Fantasia | 0.1  | 0.15     | 0.05  | 0.05    | 0.3   | 0.05     | 0.05   | 0.05     | 1        | 0.2    |
 | Sci-Fi   | 0.55 | 0.5      | 0.3   | 0.25    | 0.4   | 0.45     | 0.55   | 0.5      | 0.2      | 1      |
-
-
-## TODO
-- [ ] Corrigir locale para mostrar caracteres especiais
