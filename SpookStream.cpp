@@ -22,11 +22,12 @@ struct indices {
 
 // matriz que contém as similaridades entre os gêneros dos filmes
 // consulte o README
-float matrizSimilaridade[11][11] = {{1, 0.8, 0.35, 0.3, 0.6, 0.7, 0.75, 0.4, 0.1, 0.55},    {0.8, 1, 0.3, 0.25, 0.4, 0.5, 0.6, 0.3, 0.15, 0.5},
-                                    {0.35, 0.3, 1, 0.8, 0.2, 0.25, 0.35, 0.15, 0.05, 0.3},  {0.3, 0.25, 0.8, 1, 0.3, 0.2, 0.3, 0.1, 0.05, 0.25},
-                                    {0.6, 0.4, 0.2, 0.3, 1, 0.35, 0.45, 0.3, 0.3, 0.4},     {0.7, 0.5, 0.25, 0.2, 0.35, 1, 0.8, 0.6, 0.05, 0.45},
-                                    {0.75, 0.6, 0.35, 0.3, 0.45, 0.8, 1, 0.65, 0.05, 0.55}, {0.4, 0.3, 0.15, 0.1, 0.3, 0.6, 0.65, 1, 0.05, 0.5},
-                                    {0.1, 0.15, 0.05, 0.05, 0.3, 0.05, 0.05, 0.05, 1, 0.2}, {0.55, 0.5, 0.3, 0.25, 0.4, 0.45, 0.55, 0.5, 0.2, 1}};
+float matrizSimilaridade[11][11] = {
+    {1, 0.8, 0.35, 0.3, 0.6, 0.7, 0.75, 0.4, 0.1, 0.55},    {0.8, 1, 0.3, 0.25, 0.4, 0.5, 0.6, 0.3, 0.15, 0.5},
+    {0.35, 0.3, 1, 0.8, 0.2, 0.25, 0.35, 0.15, 0.05, 0.3},  {0.3, 0.25, 0.8, 1, 0.3, 0.2, 0.3, 0.1, 0.05, 0.25},
+    {0.6, 0.4, 0.2, 0.3, 1, 0.35, 0.45, 0.3, 0.3, 0.4},     {0.7, 0.5, 0.25, 0.2, 0.35, 1, 0.8, 0.6, 0.05, 0.45},
+    {0.75, 0.6, 0.35, 0.3, 0.45, 0.8, 1, 0.65, 0.05, 0.55}, {0.4, 0.3, 0.15, 0.1, 0.3, 0.6, 0.65, 1, 0.05, 0.5},
+    {0.1, 0.15, 0.05, 0.05, 0.3, 0.05, 0.05, 0.05, 1, 0.2}, {0.55, 0.5, 0.3, 0.25, 0.4, 0.45, 0.55, 0.5, 0.2, 1}};
 
 // vetor com os generos e seus indices
 indices generos[11] = {{"Ação", 0},     {"Aventura", 1}, {"Drama", 2},    {"Romance", 3},  {"Comédia", 4},           {"Crime", 5},
@@ -38,7 +39,6 @@ void mostrarCatalogo(int nFilmes, Filme filmes[]) {
   int numFilme; // numero que usuário escolherá na seleção de filmes
 
   for (int i = 0; i < nFilmes; i++) {
-
     // left - alinha conteúdo à esquerda
     // setw - witdh (largura) de cada célula
     cout << left << i + 1 << " - " << setw(30) << filmes[i].nome;
@@ -48,7 +48,6 @@ void mostrarCatalogo(int nFilmes, Filme filmes[]) {
       cout << endl;
       cont = 0;
     }
-
     cont++;
   }
   // quebra de linha final
@@ -68,11 +67,9 @@ void selecionarFilmes(int nFilmes, Filme filmes[], Filme filmesSelecionados[]) {
       cout << "Esse filme não está no catálogo. Digite outro número:" << endl;
       cin >> opc;
     }
-
     filmesSelecionados[i] = filmes[opc - 1];
 
     cout << "\nFilme escolhido: " << filmes[opc - 1].nome << endl;
-
     cout << "\nEscolha outro filme: ";
   }
 }
@@ -84,7 +81,6 @@ float consultarMatrizSimilaridade(string generoFilmeSelecionado, string generoFi
   int linha = -1, coluna = -1;
 
   for (int i = 0; i < 11; i++) {
-
     if (generos[i].genero.compare(generoFilme) == 0) {
       linha = i;
     }
@@ -107,7 +103,6 @@ void calcularNovaProbabilidade(int nFilmes, Filme filmes[], Filme filmesSelecion
 
   for (int j = 0; j < 3; j++) {
     for (int i = 0; i < nFilmes; i++) {
-
       // comparando os gêneros principais
       if (filmesSelecionados[j].genero1.compare(filmes[i].genero1) == 0) {
         filmes[i].probabilidade = 1;
@@ -136,7 +131,6 @@ void calcularNovaProbabilidade(int nFilmes, Filme filmes[], Filme filmesSelecion
 }
 
 int main() {
-
   // Definindo região
   setlocale(LC_ALL, "portuguese");
 
@@ -159,6 +153,23 @@ int main() {
     nFilmes++;
   }
   r_filmes.close(); // fechando arquivo de texto
+
+  cout << "    -- -  ---  ____                                                               ---- -- --                 " << endl;
+  cout << "  ---      ___|....|___           ----                      --                                               " << endl;
+  cout << "-- --    _|............|_                                 -  -- ---                                       -- " << endl;
+  cout << "       _|................|_                                                                 - --             " << endl;
+  cout << "  -- _|.......____........_|__                       ____   _____   ____   ____    __   __                   " << endl;
+  cout << "    |......._| ___|....._| ___|                     |....| |.....| |....| |....|  |..|_/..|                  " << endl;
+  cout << "    |......|  |........|  |       ----              |.|__  |.....| |.||.| |.||.|  |......./    ---           " << endl;
+  cout << "   _|......|_ |___.....|_ |___                      |....| |...__| |.||.| |.||.|  |..._../                   " << endl;
+  cout << "  |..........|____|......|____|          -----       __|.| |..|    |.||.| |.||.|  |..| |..|                  " << endl;
+  cout << "  |............................|                    |____| |__|    |____| |____|  |__| |__|          --      " << endl;
+  cout << "- |............................|                     ____   ________   ____    _____   _____   __     __     " << endl;
+  cout << "  |........................O...|                    |....| |__....__| |....|  |..___| |.._..| |..|   |..|    " << endl;
+  cout << "  |............................|   ------           |.|__     |..|    |..._|  |.|___  |.|_|.| |...|_|...|  --" << endl;
+  cout << "--|...__......__........__.....|                    |....|    |..|    |.|.|   |..___| |.._..| |...___...|    " << endl;
+  cout << "  |..|  |....|  |......|  |....|                     __|.|    |..|    |.||.|  |.|___  |.| |.| |..|   |..|    " << endl;
+  cout << " -|__|   |__|    |____|    |__|      ---            |____|    |__|    |_| |_| |_____| |_| |_| |__|   |__| -  " << endl;
 
   cout << "\nSeja bem-vindo(a) ao SpookStream!" << endl;
   cout << "\nPara sua melhor experiência selecione o número correspondente ao seu filme favorito:\n" << endl;
