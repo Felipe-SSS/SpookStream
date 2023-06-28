@@ -40,10 +40,12 @@ int main() {
     cout << "Digite o ano de lançamento do filme: ";
     cin >> filme.ano_lancamento;
 
+    // muda a linha antes escrever
+    filmesOut << endl;
     filmesOut << filme.nome << endl;
     filmesOut << filme.genero1 << endl;
     filmesOut << filme.genero2 << endl;
-    filmesOut << filme.ano_lancamento << endl;
+    filmesOut << filme.ano_lancamento;
 
     cout << endl;
   }
