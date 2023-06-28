@@ -24,7 +24,7 @@ Animação
 Aventura
 A Origem
 2010
-Acao
+Ação
 Suspense
 Amnésia
 2000
@@ -49,18 +49,18 @@ Romance
 Interestelar
 2014
 Aventura
-Ficcao Cientifica
+Ficção Científica
 Cidade de Deus
 2002
 Crime
 Drama
 Os Vingadores
 2012
-Acao
+Ação
 Aventura
 Jurassic Park
 1993
-Acao
+Ação
 Aventura
 Orgulho e Preconceito
 2005
@@ -72,7 +72,7 @@ Horror
 Suspense
 O Grande Lebowski
 1998
-Comedia
+Comédia
 Crime
 O Labirinto do Fauno
 2006
@@ -80,5 +80,9 @@ Drama
 Fantasia
 Toy Story
 1995
-Animacao
+Animação
 Aventura
+Megatubarão
+2018
+Ação
+Ficção Científica
