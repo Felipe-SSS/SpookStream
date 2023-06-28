@@ -70,7 +70,9 @@ void selecionarFilmes(int nFilmes, Filme filmes[], Filme filmesSelecionados[]) {
     filmesSelecionados[i] = filmes[opc - 1];
 
     cout << "\nFilme escolhido: " << filmes[opc - 1].nome << endl;
-    cout << "\nEscolha outro filme: ";
+
+    if (i < 2)
+      cout << "\nEscolha outro filme: ";
   }
 }
 
@@ -103,27 +105,19 @@ void calcularNovaProbabilidade(int nFilmes, Filme filmes[], Filme filmesSelecion
 
   for (int j = 0; j < 3; j++) {
     for (int i = 0; i < nFilmes; i++) {
+
       // comparando os gêneros principais
       if (filmesSelecionados[j].genero1.compare(filmes[i].genero1) == 0) {
-        filmes[i].probabilidade = 1;
-      }
-
-      // comparando primário com secundário
-      if (filmesSelecionados[j].genero1.compare(filmes[i].genero2) == 0) {
+        filmes[i].probabilidade = (filmes[i].probabilidade + 1) / 2;
+      } else if (filmesSelecionados[j].genero2.compare(filmes[i].genero2) == 0) {
+        filmes[i].probabilidade = (filmes[i].probabilidade + 0.5) / 2;
+      } else {
         // chamando a função que retorna a similaridade entre os gêneros
         similaridade = consultarMatrizSimilaridade(filmesSelecionados[j].genero1, filmes[i].genero2);
-        filmes[i].probabilidade = (filmes[i].probabilidade + similaridade) / 2;
-      }
 
-      // comparando os gêneros secundários
-      if (filmesSelecionados[j].genero2.compare(filmes[i].genero2) == 0) {
-        filmes[i].probabilidade = (filmes[i].probabilidade + 0.5) / 2;
-      }
+        // fazendo média aritmética das duas similaridades buscadas
+        similaridade += consultarMatrizSimilaridade(filmesSelecionados[j].genero2, filmes[i].genero1) / 2;
 
-      // comparando secundário com primário
-      if (filmesSelecionados[j].genero2.compare(filmes[i].genero1) == 0) {
-        // chamando a função que retorna a similaridade entre os gêneros
-        similaridade = consultarMatrizSimilaridade(filmesSelecionados[j].genero2, filmes[i].genero1);
         filmes[i].probabilidade = (filmes[i].probabilidade + similaridade) / 2;
       }
     }
@@ -182,6 +176,12 @@ int main() {
 
   // calcular probabilidade de recomendar filmes
   calcularNovaProbabilidade(nFilmes, filmes, filmesSelecionados);
+
+  // mostrando filmes e a chance deles serem recomendados
+  for (int i = 0; i < nFilmes; i++) {
+    cout << "Nome do filme: " << filmes[i].nome << endl;
+    cout << "Chance de recomendá-lo: " << filmes[i].probabilidade << endl << endl;
+  }
 
   return 0;
 }
