@@ -20,19 +20,6 @@ struct indices {
   int indice;    // indice do filme na matriz de similaridade
 };
 
-// matriz que contém as similaridades entre os gêneros dos filmes
-// consulte o README
-float matrizSimilaridade[11][11] = {
-    {1, 0.8, 0.35, 0.3, 0.6, 0.7, 0.75, 0.4, 0.1, 0.55},    {0.8, 1, 0.3, 0.25, 0.4, 0.5, 0.6, 0.3, 0.15, 0.5},
-    {0.35, 0.3, 1, 0.8, 0.2, 0.25, 0.35, 0.15, 0.05, 0.3},  {0.3, 0.25, 0.8, 1, 0.3, 0.2, 0.3, 0.1, 0.05, 0.25},
-    {0.6, 0.4, 0.2, 0.3, 1, 0.35, 0.45, 0.3, 0.3, 0.4},     {0.7, 0.5, 0.25, 0.2, 0.35, 1, 0.8, 0.6, 0.05, 0.45},
-    {0.75, 0.6, 0.35, 0.3, 0.45, 0.8, 1, 0.65, 0.05, 0.55}, {0.4, 0.3, 0.15, 0.1, 0.3, 0.6, 0.65, 1, 0.05, 0.5},
-    {0.1, 0.15, 0.05, 0.05, 0.3, 0.05, 0.05, 0.05, 1, 0.2}, {0.55, 0.5, 0.3, 0.25, 0.4, 0.45, 0.55, 0.5, 0.2, 1}};
-
-// vetor com os generos e seus indices
-indices generos[11] = {{"Ação", 0},     {"Aventura", 1}, {"Drama", 2},    {"Romance", 3},  {"Comédia", 4},           {"Crime", 5},
-                       {"Suspense", 6}, {"Horror", 7},   {"Animação", 8}, {"Fantasia", 9}, {"Ficção Científica", 10}};
-
 void mostrarCatalogo(int nFilmes, Filme filmes[]) {
 
   int cont = 1; // contador para ajudar no ajuste do catálogo em forma de tabela
@@ -79,6 +66,36 @@ void selecionarFilmes(int nFilmes, Filme filmes[], Filme filmesSelecionados[]) {
 // função que busca os filmes na matriz e retorna a similaridade
 float consultarMatrizSimilaridade(string generoFilmeSelecionado, string generoFilme) {
 
+  // matriz que contém as similaridades entre os gêneros dos filmes
+  // consulte o README
+  float matrizSimilaridade[11][11] = {
+      {1, 0.8, 0.35, 0.3, 0.6, 0.7, 0.75, 0.4, 0.1, 0.55},    
+      {0.8, 1, 0.3, 0.25, 0.4, 0.5, 0.6, 0.3, 0.15, 0.5},
+      {0.35, 0.3, 1, 0.8, 0.2, 0.25, 0.35, 0.15, 0.05, 0.3},  
+      {0.3, 0.25, 0.8, 1, 0.3, 0.2, 0.3, 0.1, 0.05, 0.25},
+      {0.6, 0.4, 0.2, 0.3, 1, 0.35, 0.45, 0.3, 0.3, 0.4},     
+      {0.7, 0.5, 0.25, 0.2, 0.35, 1, 0.8, 0.6, 0.05, 0.45},
+      {0.75, 0.6, 0.35, 0.3, 0.45, 0.8, 1, 0.65, 0.05, 0.55}, 
+      {0.4, 0.3, 0.15, 0.1, 0.3, 0.6, 0.65, 1, 0.05, 0.5},
+      {0.1, 0.15, 0.05, 0.05, 0.3, 0.05, 0.05, 0.05, 1, 0.2}, 
+      {0.55, 0.5, 0.3, 0.25, 0.4, 0.45, 0.55, 0.5, 0.2, 1}
+  };
+
+  // vetor com os generos e seus indices
+  indices generos[11] = {
+    {"Ação", 0},     
+    {"Aventura", 1}, 
+    {"Drama", 2},    
+    {"Romance", 3},  
+    {"Comédia", 4},           
+    {"Crime", 5},
+    {"Suspense", 6}, 
+    {"Horror", 7},   
+    {"Animação", 8}, 
+    {"Fantasia", 9}, 
+    {"Ficção Científica", 10}
+  };
+
   float similaridade;
   int linha = -1, coluna = -1;
 
@@ -106,18 +123,23 @@ void calcularNovaProbabilidade(int nFilmes, Filme filmes[], Filme filmesSelecion
   for (int j = 0; j < 3; j++) {
     for (int i = 0; i < nFilmes; i++) {
 
-      // comparando os gêneros principais
+      // gêneros principais iguais
       if (filmesSelecionados[j].genero1.compare(filmes[i].genero1) == 0) {
         filmes[i].probabilidade = (filmes[i].probabilidade + 1) / 2;
-      } else if (filmesSelecionados[j].genero2.compare(filmes[i].genero2) == 0) {
+      } 
+      // gêneros secundários iguais
+      else if (filmesSelecionados[j].genero2.compare(filmes[i].genero2) == 0) {
         filmes[i].probabilidade = (filmes[i].probabilidade + 0.5) / 2;
-      } else {
+      }
+      // gêneros diferentes
+      else {
         // chamando a função que retorna a similaridade entre os gêneros
         similaridade = consultarMatrizSimilaridade(filmesSelecionados[j].genero1, filmes[i].genero2);
 
         // fazendo média aritmética das duas similaridades buscadas
         similaridade += consultarMatrizSimilaridade(filmesSelecionados[j].genero2, filmes[i].genero1) / 2;
 
+        // média aritmética para calcular probabilidade
         filmes[i].probabilidade = (filmes[i].probabilidade + similaridade) / 2;
       }
     }
