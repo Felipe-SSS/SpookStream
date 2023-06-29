@@ -31,14 +31,16 @@ int main() {
     cin.ignore();
     getline(cin, filme.nome);
 
+    cout << "Digite o ano de lançamento do filme: ";
+    cin >> filme.ano_lancamento;
+    
     cout << "Digite o gênero principal do filme: ";
     getline(cin, filme.genero1);
 
     cout << "Digite o gênero secundário do filme: ";
     getline(cin, filme.genero2);
 
-    cout << "Digite o ano de lançamento do filme: ";
-    cin >> filme.ano_lancamento;
+  
 
     // muda a linha antes escrever
     filmesOut << endl;
