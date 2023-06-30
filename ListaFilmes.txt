@@ -6,10 +6,18 @@ O Poderoso Chefao
 1972
 Crime
 Drama
+Zodiaco
+2007
+Suspense
+Crime
 Pulp Fiction
 1994
 Crime
 Drama
+Ratatouille
+2007
+Animacao
+Comedia
 Um Sonho de Liberdade
 1994
 Drama
@@ -18,18 +26,22 @@ Clube da Luta
 1999
 Drama
 Suspense
-Tá Dando Onda
+Ta Dando Onda
 2007
 Animação
+Aventura
+Mulan
+1998
+Animacao
 Aventura
 A Origem
 2010
 Ação
 Suspense
-Amnésia
-2000
-Suspense
-Drama
+Procurando Nemo
+2003
+Animacao
+Aventura
 Matrix
 1999
 Ação
@@ -42,6 +54,10 @@ Avatar
 2009
 Ação
 Ficção Científica
+A Era do Gelo
+2002
+Animacao
+Aventura
 De repente 30
 2004
 Comédia
@@ -62,6 +78,10 @@ Jurassic Park
 1993
 Ação
 Aventura
+Psicose
+1960
+Suspense
+Horror
 Orgulho e Preconceito
 2005
 Romance
@@ -74,6 +94,10 @@ O Grande Lebowski
 1998
 Comédia
 Crime
+O Rei Leao
+1994
+Animacao
+Aventura
 O Labirinto do Fauno
 2006
 Drama
@@ -81,4 +105,16 @@ Fantasia
 Toy Story
 1995
 Animação
+Aventura
+O Chamado
+2002
+Horror
+Suspense
+O Lobo de Wall Street
+2013
+Crime
+Comedia
+Up - Altas Aventuras
+2009
+Animacao
 Aventura

@@ -1,8 +1,9 @@
-#define ESC "\033["
-#define BLUE_TXT "34"
-#define RED_TXT "31"
-#define WHITE_TXT "29"
-#define RESET "\033[m"
+#define ESC "\033[" // Comando de inicialização de linha com cor personalizada
+#define BLUE_TXT "34" // Cor de texto azul
+#define RED_TXT "31" // Cor de texto vermelho
+#define WHITE_TXT "29" // Cor de texto branco
+#define GREEN_TXT "92" // Cor de texto verde
+#define RESET "\033[m" // Comando para finalizar personalização de linha
 
 #include <cstring>
 #include <fstream>
@@ -10,7 +11,6 @@
 #include <iostream>
 #include <locale.h>
 #include <windows.h> // limpar terminal
-
 using namespace std;
 
 // struct com os dados dos filmes
@@ -43,7 +43,7 @@ void mostrarCatalogo(int nFilmes, Filme filmes[])
   {
     // left - alinha conteúdo à esquerda
     // setw - witdh (largura) de cada célula
-    cout << left << i + 1 << " - " << setw(30) << filmes[i].nome;
+    cout << ESC << ";" << WHITE_TXT << "m" << left << i + 1 << RESET << ESC << ";" << GREEN_TXT << "m" << " - " << RESET << setw(30) << filmes[i].nome;
 
     if (cont == 3)
     {
@@ -61,7 +61,7 @@ void mostrarCatalogo(int nFilmes, Filme filmes[])
 void selecionarFilmes(int nFilmes, Filme filmes[], Filme filmesSelecionados[], int numSelecao)
 {
   int opc; // opcao escolhida
-
+  cout << "\nEscolha um filme: ";
   for (int i = 0; i < numSelecao; i++)
   {
     cin >> opc;
@@ -187,6 +187,10 @@ void printarColorido(string txt, char color)
     {
         cout << ESC << ";" << WHITE_TXT << "m" << txt;
     }
+    else if(color == 'g')
+	{
+		cout << ESC << ";" << GREEN_TXT << "m" << txt;
+	}
     cout << RESET;
 }
 
@@ -221,7 +225,7 @@ int main()
   Sleep(600);
   printarColorido("  |__|   |__|    |____|    |__|                ", 'w'); printarColorido(" |_____/   \\__| |_|     \\___|  \\__,_| |_| |_| |_|     ", 'r'); cout << endl;
   Sleep(600);
-  cout << endl;
+  cout << endl << endl;
   system("pause");
 
   ifstream r_filmes;                   // variavel de leitura do arquivo
@@ -238,13 +242,15 @@ int main()
     getline(r_filmes, filmes[nFilmes].genero1, '\n');
     getline(r_filmes, filmes[nFilmes].genero2, '\n');
     nFilmes++;
-    cout << filmes[nFilmes].nome;
   }
+
   r_filmes.close(); // fechando arquivo de texto
   
   system("cls");
-
-  cout << "************************* Seja bem-vindo(a) ao SpookStream! *************************\n" << endl;
+  
+  
+  printarColorido("************************* ", 'b'); printarColorido("Seja bem-vindo(a) ao Spook", 'w'); printarColorido("Stream", 'r'); printarColorido("!", 'w');printarColorido(" *************************\n", 'b'); cout << endl;
+  
   cout << "Para sua melhor experiência selecione o número correspondente ao seu filme favorito:\n " << endl;
 
   Filme filmesSelecionados[3]; //opções de preferência do usuário
@@ -263,7 +269,7 @@ int main()
   
   // perguntar se gostaria de assistir um filme
   string opcao;
-  cout << "Gostaria de assistir algum filme? ([S] [N]):" << endl;
+  cout << "Gostaria de assistir algum filme? "; printarColorido("(", 'b'); printarColorido("[S] " , 'g'); printarColorido("[N]", 'r' ); printarColorido(")", 'b'); printarColorido(": ", 'w');
   cin.ignore();
   getline(cin, opcao);
   cout << endl;
@@ -296,17 +302,19 @@ int main()
           indice = j;
         }
       }
-      filmes[indice].probabilidade = 1; // "eliminando" probabilidade para continuar comparação
+      filmes[indice].probabilidade = 1; // "+eliminando" probabilidade para continuar comparação
     }
 
     // apresentar catalogo
-    cout << "Filmes recomendados:" << endl;
+    cout << "Filmes recomendados:\n" << endl;
     mostrarCatalogo(6, recomendacoes);
 
     // selecionar um dos filmes
     selecionarFilmes(6, recomendacoes, filmesSelecionados, 1);
-
-    cout << "Assistindo " << filmesSelecionados[0].nome << endl ;
+	
+	system("cls");
+	
+    printarColorido("Assistindo", 'g'); printarColorido(": ", 'b'); cout << filmesSelecionados[0].nome << endl;
     cout << endl;
 
     system("pause");
@@ -314,7 +322,7 @@ int main()
 
     // perguntar se gostaria de assistir novamente
     string opcao;
-    cout << "Gostaria de assistir mais algum filme? ([S] [N]): " << endl;
+    cout << "Gostaria de assistir mais algum filme? "; printarColorido("(", 'b'); printarColorido("[S] " , 'g'); printarColorido("[N]", 'r' ); printarColorido(")", 'b'); printarColorido(": ", 'w');
     cin.ignore();
     getline(cin, opcao);
     cout << endl;
@@ -328,7 +336,8 @@ int main()
     }
   }
 
-  cout << "\nPrograma finalizado." << endl;
+  printarColorido("Programa finalizado", 'r'); printarColorido(".", 'g');
+  cout << endl;
 
   return 0;
 }
