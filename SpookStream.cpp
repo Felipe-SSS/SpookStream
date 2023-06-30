@@ -304,7 +304,7 @@ int main()
     mostrarCatalogo(6, recomendacoes);
 
     // selecionar um dos filmes
-    selecionarFilmes(nFilmes, filmes, filmesSelecionados, 1);
+    selecionarFilmes(6, recomendacoes, filmesSelecionados, 1);
 
     cout << "Assistindo " << filmesSelecionados[0].nome << endl ;
     cout << endl;
