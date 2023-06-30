@@ -9,7 +9,7 @@
 #include <iomanip> // tabela
 #include <iostream>
 #include <locale.h>
-//#include <windows.h> // limpar terminal
+#include <windows.h> // limpar terminal
 
 using namespace std;
 
@@ -202,25 +202,25 @@ int main()
   printarColorido("               ____                            ", 'w'); printarColorido("                                                         ", 'w'); cout << endl;
   printarColorido("           ___|    |___                        ", 'w'); printarColorido("                                                         ", 'w'); cout << endl;
   printarColorido("         _|            |_                      ", 'w'); printarColorido("        _____                           _                ", 'w'); cout << endl;
-  //Sleep(600);
+  Sleep(600);
   printarColorido("       _|                |_                    ", 'w'); printarColorido("       / ____|                         | |               ", 'w'); cout << endl;
   printarColorido("     _|       ____        _|__                 ", 'w'); printarColorido("      | (___    _ __     ___     ___   | | __            ", 'w'); cout << endl;
   printarColorido("    |       _| ___|     _| ___|                ", 'w'); printarColorido("       \\___ \\  | '_ \\   / _ \\   / _ \\  | |/ /       ", 'w'); cout << endl;
-  //Sleep(600);
+  Sleep(600);
   printarColorido("    |      |  |        |  |                    ", 'w'); printarColorido("       ____) | | |_) | | (_) | | (_) | |   <             ", 'w'); cout << endl;
   printarColorido("   _|      |_ |___     |_ |___                 ", 'w'); printarColorido("      |_____/  | .__/   \\___/   \\___/  |_|\\_\\        ", 'w'); cout << endl;
   printarColorido("  |          |____|      |____|                ", 'w'); printarColorido("               | |                                       ", 'w'); cout << endl;
-  //Sleep(600);
+  Sleep(600);
   printarColorido("  |                            |               ", 'w'); printarColorido("               |_|                                       ", 'w'); cout << endl;
   printarColorido("  |                            |               ", 'w'); printarColorido("   _____   _                                             ", 'r'); cout << endl;
   printarColorido("  |                            |               ", 'w'); printarColorido("  / ____| | |                                            ", 'r'); cout << endl;
-  //Sleep(600);
+  Sleep(600);
   printarColorido("  |                            |               ", 'w'); printarColorido(" | (___   | |_   _ __    ___    __ _   _ __ ___          ", 'r'); cout << endl;
   printarColorido("  |   __      __        __     |               ", 'w'); printarColorido("  \\___ \\  | __| | '__|  / _ \\  / _` | | '_ ` _ \\     ", 'r'); cout << endl;
   printarColorido("  |  |  |    |  |      |  |    |               ", 'w'); printarColorido("  ____) | | |_  | |    |  __/ | (_| | | | | | | |        ", 'r'); cout << endl;
-  //Sleep(600);
+  Sleep(600);
   printarColorido("  |__|   |__|    |____|    |__|                ", 'w'); printarColorido(" |_____/   \\__| |_|     \\___|  \\__,_| |_| |_| |_|     ", 'r'); cout << endl;
-  //Sleep(600);
+  Sleep(600);
   cout << endl;
   system("pause");
 
