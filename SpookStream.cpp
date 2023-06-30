@@ -9,8 +9,7 @@
 #include <iomanip> // tabela
 #include <iostream>
 #include <locale.h>
-#include <cstdlib> // biblioteca para numeros aleatorios. Usada para aplicar as porcentagens aos filmes
-#include <windows.h> // usada para limpar a tela do terminal
+//#include <windows.h> // limpar terminal
 
 using namespace std;
 
@@ -22,6 +21,12 @@ struct Filme
   string genero1;      // gênero principal do filme
   string genero2;      // gênero secundário do filme
   float probabilidade; // chance de recomendar o filme ao usuário
+
+  // construtor da classe
+  // roda quando um objeto for inicializado
+  Filme() {
+    probabilidade = 0.0; // define 0 como valor padrão para probabilidade
+  };
 };
 
 struct indices
@@ -32,9 +37,7 @@ struct indices
 
 void mostrarCatalogo(int nFilmes, Filme filmes[])
 {
-
-  int cont = 1; // nFilmesFiltrados para ajudar no ajuste do catálogo em forma de tabela
-  int numFilme; // numero que usuário escolherá na seleção de filmes
+  int cont = 1; // contador para ajudar no ajuste do catálogo em forma de tabela
 
   for (int i = 0; i < nFilmes; i++)
   {
@@ -55,12 +58,11 @@ void mostrarCatalogo(int nFilmes, Filme filmes[])
 }
 
 // ler filmes favoritos do usuário
-void selecionarFilmes(int nFilmes, Filme filmes[], Filme filmesSelecionados[])
+void selecionarFilmes(int nFilmes, Filme filmes[], Filme filmesSelecionados[], int numSelecao)
 {
-
   int opc; // opcao escolhida
 
-  for (int i = 0; i < 3; i++)
+  for (int i = 0; i < numSelecao; i++)
   {
     cin >> opc;
 
@@ -74,7 +76,7 @@ void selecionarFilmes(int nFilmes, Filme filmes[], Filme filmesSelecionados[])
 
     cout << "\nFilme escolhido: " << filmes[opc - 1].nome << endl;
 
-    if (i < 2)
+    if (i < numSelecao - 1)
       cout << "\nEscolha outro filme: ";
   }
 }
@@ -82,7 +84,6 @@ void selecionarFilmes(int nFilmes, Filme filmes[], Filme filmesSelecionados[])
 // função que busca os filmes na matriz e retorna a similaridade
 float consultarMatrizSimilaridade(string generoFilmeSelecionado, string generoFilme)
 {
-
   // matriz que contém as similaridades entre os gêneros dos filmes
   // consulte o README
   float matrizSimilaridade[11][11] = {
@@ -111,7 +112,7 @@ float consultarMatrizSimilaridade(string generoFilmeSelecionado, string generoFi
       {"Fantasia", 9},
       {"Ficção Científica", 10}};
 
-  float similaridade;
+  float similaridade; // variável que guarda a similaridade entre os gêneros
   int linha = -1, coluna = -1;
 
   for (int i = 0; i < 11; i++)
@@ -127,6 +128,7 @@ float consultarMatrizSimilaridade(string generoFilmeSelecionado, string generoFi
 
     if (linha != -1 && coluna != -1)
     {
+      // busca o valor da similaridade na matriz
       similaridade = matrizSimilaridade[linha][coluna];
       break;
     }
@@ -135,25 +137,23 @@ float consultarMatrizSimilaridade(string generoFilmeSelecionado, string generoFi
 }
 
 // função para calcular 'pesos' e atribuí-los à probabilidade de cada filme
-void calcularNovaProbabilidade(int nFilmes, Filme filmes[], Filme filmesSelecionados[])
+void calcularNovaProbabilidade(int nFilmes, Filme filmes[], Filme filmesSelecionados[], int numSelecao)
 {
-
   float similaridade;
 
-  for (int j = 0; j < 3; j++)
+  for (int j = 0; j < numSelecao; j++)
   {
     for (int i = 0; i < nFilmes; i++)
     {
-
       // gêneros principais iguais
       if (filmesSelecionados[j].genero1.compare(filmes[i].genero1) == 0)
       {
-        filmes[i].probabilidade = (filmes[i].probabilidade + 1) / 2;
+        filmes[i].probabilidade = (filmes[i].probabilidade + 1) / 2; // média aritmética
       }
       // gêneros secundários iguais
       else if (filmesSelecionados[j].genero2.compare(filmes[i].genero2) == 0)
       {
-        filmes[i].probabilidade = (filmes[i].probabilidade + 0.5) / 2;
+        filmes[i].probabilidade = (filmes[i].probabilidade + 0.5) / 2; // média aritmética
       }
       // gêneros diferentes
       else
@@ -162,7 +162,7 @@ void calcularNovaProbabilidade(int nFilmes, Filme filmes[], Filme filmesSelecion
         similaridade = consultarMatrizSimilaridade(filmesSelecionados[j].genero1, filmes[i].genero2);
 
         // fazendo média aritmética das duas similaridades buscadas
-        similaridade += consultarMatrizSimilaridade(filmesSelecionados[j].genero2, filmes[i].genero1) / 2;
+        similaridade = (similaridade + consultarMatrizSimilaridade(filmesSelecionados[j].genero2, filmes[i].genero1)) / 2;
 
         // média aritmética para calcular probabilidade
         filmes[i].probabilidade = (filmes[i].probabilidade + similaridade) / 2;
@@ -196,46 +196,39 @@ int main()
   setlocale(LC_ALL, "portuguese");
 
   Filme filmes[100]; // vetor de filmes
-  // filmes[0].nome = "TESTE";
-  // filmes[0].ano_lancamento = 1997;
-  // filmes[0].genero1 = "Drama";
-  // filmes[0].genero2 = "Romance";
-
-  // filmes[1].nome = "TESTE2";
-  // filmes[1].ano_lancamento = 1997;
-  // filmes[1].genero1 = "Drama";
-  // filmes[1].genero2 = "Romance";
   int nFilmes = 0;   // numero de filmes
 
-  
 
   printarColorido("               ____                            ", 'w'); printarColorido("                                                         ", 'w'); cout << endl;
   printarColorido("           ___|    |___                        ", 'w'); printarColorido("                                                         ", 'w'); cout << endl;
   printarColorido("         _|            |_                      ", 'w'); printarColorido("        _____                           _                ", 'w'); cout << endl;
-  Sleep(600);
+  //Sleep(600);
   printarColorido("       _|                |_                    ", 'w'); printarColorido("       / ____|                         | |               ", 'w'); cout << endl;
   printarColorido("     _|       ____        _|__                 ", 'w'); printarColorido("      | (___    _ __     ___     ___   | | __            ", 'w'); cout << endl;
   printarColorido("    |       _| ___|     _| ___|                ", 'w'); printarColorido("       \\___ \\  | '_ \\   / _ \\   / _ \\  | |/ /       ", 'w'); cout << endl;
-  Sleep(600);
+  //Sleep(600);
   printarColorido("    |      |  |        |  |                    ", 'w'); printarColorido("       ____) | | |_) | | (_) | | (_) | |   <             ", 'w'); cout << endl;
   printarColorido("   _|      |_ |___     |_ |___                 ", 'w'); printarColorido("      |_____/  | .__/   \\___/   \\___/  |_|\\_\\        ", 'w'); cout << endl;
   printarColorido("  |          |____|      |____|                ", 'w'); printarColorido("               | |                                       ", 'w'); cout << endl;
-  Sleep(600);
+  //Sleep(600);
   printarColorido("  |                            |               ", 'w'); printarColorido("               |_|                                       ", 'w'); cout << endl;
   printarColorido("  |                            |               ", 'w'); printarColorido("   _____   _                                             ", 'r'); cout << endl;
   printarColorido("  |                            |               ", 'w'); printarColorido("  / ____| | |                                            ", 'r'); cout << endl;
-  Sleep(600);
+  //Sleep(600);
   printarColorido("  |                            |               ", 'w'); printarColorido(" | (___   | |_   _ __    ___    __ _   _ __ ___          ", 'r'); cout << endl;
   printarColorido("  |   __      __        __     |               ", 'w'); printarColorido("  \\___ \\  | __| | '__|  / _ \\  / _` | | '_ ` _ \\     ", 'r'); cout << endl;
   printarColorido("  |  |  |    |  |      |  |    |               ", 'w'); printarColorido("  ____) | | |_  | |    |  __/ | (_| | | | | | | |        ", 'r'); cout << endl;
-  Sleep(600);
+  //Sleep(600);
   printarColorido("  |__|   |__|    |____|    |__|                ", 'w'); printarColorido(" |_____/   \\__| |_|     \\___|  \\__,_| |_| |_| |_|     ", 'r'); cout << endl;
+  //Sleep(600);
+  cout << endl;
+  system("pause");
 
-  // importar filmes
   ifstream r_filmes;                   // variavel de leitura do arquivo
   string fileName = "ListaFilmes.txt"; // nome do arquivo
 
   r_filmes.open(fileName.c_str(), ifstream::in);
+
   // lê todas as linhas do arquivo
   while (!r_filmes.eof())
   {
@@ -251,32 +244,34 @@ int main()
   
   system("cls");
 
-  cout << "************************* Seja bem-vindo(a) ao SpookStream! *************************" << endl;
-  cout << "Para sua melhor experiência selecione o número correspondente ao seu filme favorito: " << endl;
+  cout << "************************* Seja bem-vindo(a) ao SpookStream! *************************\n" << endl;
+  cout << "Para sua melhor experiência selecione o número correspondente ao seu filme favorito:\n " << endl;
 
-
-  // ler preferencias de filmes do usuario
   Filme filmesSelecionados[3]; //opções de preferência do usuário
+
+  // chamando função que mostra catálogo inicial
   mostrarCatalogo(nFilmes, filmes);
-  selecionarFilmes(nFilmes, filmes, filmesSelecionados);
+
+  // função para que o usuário selecione um dos filmes do catálogo
+  selecionarFilmes(nFilmes, filmes, filmesSelecionados, 3);
 
   // calcular probabilidade de recomendar filmes
-  calcularNovaProbabilidade(nFilmes, filmes, filmesSelecionados);
+  calcularNovaProbabilidade(nFilmes, filmes, filmesSelecionados, 3);
 
   // limpar tela
   system("cls");
   
   // perguntar se gostaria de assistir um filme
   string opcao;
-  cout << "Gostaria de assistir algum filme ([S] [N])? : ";
+  cout << "Gostaria de assistir algum filme? ([S] [N]):" << endl;
   cin.ignore();
-  getline(cin,opcao);
+  getline(cin, opcao);
   cout << endl;
 
   bool continuar = false; // condicao do loop
 
   // se escolheu continuar, definir condicao para o loop rodar
-  if(opcao == "S" || opcao == "s" || opcao == "Sim" || opcao == "sim")
+  if (opcao == "S" || opcao == "s" || opcao == "Sim" || opcao == "sim" || opcao == "SIM")
   {
     continuar = true;
   }
@@ -284,72 +279,56 @@ int main()
   // loop enquanto o usuario escolher continuar assistindo filmes
   while (continuar == true)
   {
-    // aplicando probabilidades e salvando lista dos filmesFiltrados
-    Filme filmesFiltrados[nFilmes];
-    int nFilmesFiltrados = 0;
-    
-   for (int i = 0; i < nFilmes; i++)
-   
-    {
-      // pegando valor aleatorio entre 0 e 1
-      float aleatorio = rand();
+    Filme recomendacoes[6]; // filmes que serão recomendados
+    float maior; // variável para comparar com os filmes de maior probabilidade
+    int indice; // indice do filme com maior probabilidade
+                // usado para "eliminar" um filme da comparação
 
-      if (aleatorio < filmes[i].probabilidade) // se cair na probabilidade do filme
+    // recuperando filmes com maior probabilidade
+    for (int i = 0; i < 6; i ++) 
+    {
+      maior = 0.0; // resetando o valor da variável para comparar novamente
+      for (int j = 0; j < nFilmes; j ++) 
       {
-        filmesFiltrados[nFilmesFiltrados++] = filmes[i]; // salvar filme da lista de filmesFiltrados
+        if (filmes[j].probabilidade > maior && filmes[j].probabilidade < 1) {
+          recomendacoes[i] = filmes[j];
+          maior = filmes[j].probabilidade;
+          indice = j;
+        }
       }
+      filmes[indice].probabilidade = 1; // "eliminando" probabilidade para continuar comparação
     }
 
-    // loop de escolha do filme
-    int opc = -1;
-    while (true)
-    {
     // apresentar catalogo
-    cout << "Aqui estão algumas recomendações para você:" << endl;
-    mostrarCatalogo(nFilmesFiltrados, filmesFiltrados);
+    cout << "Filmes recomendados:" << endl;
+    mostrarCatalogo(6, recomendacoes);
 
     // selecionar um dos filmes
-      cout << "Digite o numero do filme: ";
-      cin >> opc;
-      opc--; // corrigindo valor escolhido para usá-lo como indice
-      cout << endl;
+    selecionarFilmes(nFilmes, filmes, filmesSelecionados, 1);
 
-      if (opc < 0 || opc > nFilmesFiltrados) // se não está no intervalo de valores válidos
-      {
-        cout << "Valor inválido!" << endl;
-        system("pause");
-        system("cls");
-        continue;
-      }
-      // senao
-      break;
-    }
-    cout << "Aqui está o filme " << filmes[opc].nome << ". Aproveite!" << endl ;
-
+    cout << "Assistindo " << filmesSelecionados[0].nome << endl ;
     cout << endl;
 
     system("pause");
     system("cls");
 
-
     // perguntar se gostaria de assistir novamente
     string opcao;
-    cout << "Gostaria de assistir mais algum filme? ([S] [N]): ";
+    cout << "Gostaria de assistir mais algum filme? ([S] [N]): " << endl;
     cin.ignore();
     getline(cin, opcao);
     cout << endl;
 
-    if(opcao == "S" || opcao == "s" || opcao == "Sim" || opcao == "sim" || opcao == "SIM" || opcao == "Sim, por favor. Eu gostaria de assistir um de seus filmes." || opcao == "Yes" || opcao == "Sí")
+    if (opcao == "S" || opcao == "s" || opcao == "Sim" || opcao == "sim" || opcao == "SIM")
     {
       continuar = true;
+      calcularNovaProbabilidade(nFilmes, filmes, filmesSelecionados, 1);
+    } else {
+      continuar = false;
     }
-
-   // // mostrando filmes e a chance deles serem recomendados
-   // for (int i = 0; i < nFilmes; i++) {
-   //   cout << "Nome do filme: " << filmes[i].nome << endl;
-   //   cout << "Chance de recomendá-lo: " << filmes[i].probabilidade << endl << endl;
-   // }
   }
+
+  cout << "\nPrograma finalizado." << endl;
 
   return 0;
 }

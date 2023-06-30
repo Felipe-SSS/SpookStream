@@ -28,8 +28,8 @@ Ação
 Suspense
 Amnésia
 2000
-Drama
 Suspense
+Drama
 Matrix
 1999
 Ação
@@ -82,7 +82,3 @@ Toy Story
 1995
 Animação
 Aventura
-Megatubarão
-2018
-Ação
-Ficção Científica

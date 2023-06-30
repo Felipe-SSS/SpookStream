@@ -14,10 +14,6 @@ int main() {
   // nome do arquivo
   string fileName = "ListaFilmes.txt";
 
-  // Leitura dos registros existentes
-  string linha;
-
-  // Adição dos novos filmes
   int n;
   cout << "Quantos filmes deseja adicionar ao arquivo?" << endl;
   cin >> n;
@@ -42,7 +38,7 @@ int main() {
 
   
 
-    // muda a linha antes escrever
+    // muda a linha antes de escrever
     filmesOut << endl;
     filmesOut << filme.nome << endl;
     filmesOut << filme.ano_lancamento << endl;
